@@ -36,9 +36,18 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+        .target(name: "BridgingHeader",
+                dependencies: [],
+                path: "Sources",
+                sources: ["Headers"],
+                publicHeadersPath: "Headers",
+                cSettings: [
+                    .headerSearchPath("Headers")
+                ]
+        ),
         .target(
             name: "FlurryAnalytics",
-            dependencies: ["FlurryAnalyticsBinary"]
+            dependencies: ["BridgingHeader","FlurryAnalyticsBinary"]
         ),
         .target(
             name: "FlurryMessaging",
@@ -69,21 +78,21 @@ let package = Package(
             path: "artifacts/FlurryAds.xcframework"
         ),
         
-        .testTarget(
-            name: "FlurryAnalyticsSPM",
-            dependencies: ["FlurryAnalytics"]
-        ),
-        .testTarget(
-            name: "FlurryMessagingSPM",
-            dependencies: ["FlurryMessaging"]
-        ),
-        .testTarget(
-            name: "FlurryConfigSPM",
-            dependencies: ["FlurryConfig"]
-        ),
-        .testTarget(
-            name: "FlurryAdsSPM",
-            dependencies: ["FlurryAds"]
-        )
+//        .testTarget(
+//            name: "FlurryAnalyticsSPM",
+//            dependencies: ["FlurryAnalytics"]
+//        ),
+//        .testTarget(
+//            name: "FlurryMessagingSPM",
+//            dependencies: ["FlurryMessaging"]
+//        ),
+//        .testTarget(
+//            name: "FlurryConfigSPM",
+//            dependencies: ["FlurryConfig"]
+//        ),
+//        .testTarget(
+//            name: "FlurryAdsSPM",
+//            dependencies: ["FlurryAds"]
+//        )
     ]
 )
