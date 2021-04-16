@@ -9,5 +9,4 @@
 #define Bridging-Header_h
 
 #import "Flurry.h"
-
 #endif /* Bridging-Header_h */
